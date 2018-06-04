@@ -1,5 +1,15 @@
+//==============================================================================
+//Import Packages Required For App
+//==============================================================================
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+
+//==============================================================================
+//Import Components
+//==============================================================================
+import Input from "../components/UI/Input/Input";
+import Button from "../components/UI/Button/Button";
+import AuthWrapper from './AuthWrapper/AuthWrapper';
 
 class Auth extends Component {
     state = {
@@ -43,18 +53,35 @@ class Auth extends Component {
         }
 
         return (
-            <Fragment>
-                <div className = "tile is-child">
+            <AuthWrapper>
+                <div className = "tile is-child box">
                     <form>
-                        <Input />
-                        <Input />
-                        <Button />
+                        <Input
+                        type = {"email"} 
+                        placeholder = {"Email"}
+                        />
+                        <Input 
+                        type = {"password"}
+                        placeholder = {"Password"}
+                        />
+                        <div className = "level">
+                            <div className = "level-left">
+                                <Button 
+                                text = {"Submit"}
+                                />
+                            </div>
+                            <div className = "level-right">
+                                <Button
+                                text = {"New User"}
+                                />
+                            </div>
+                        </div>
                     </form>
                 </div>
                 <div className = "tile is-child">
                     <h1>This Is A Test</h1>
                 </div>
-            </Fragment>
+            </AuthWrapper>
         );
     }
 }
