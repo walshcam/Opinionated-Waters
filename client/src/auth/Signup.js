@@ -2,7 +2,6 @@
 //Import Packages Required For App
 //==============================================================================
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 //==============================================================================
 //Import Components
@@ -68,7 +67,7 @@ class Signup extends Component {
                         <div className = "level">
                             <div className = "level-left">
                                 <Button
-                                link = {"/signin"} 
+                                link = {"/"} 
                                 text = {"Submit"}
                                 />
                             </div>
