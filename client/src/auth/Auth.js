@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import { Link } from 'react-router-dom';
 
 class Auth extends Component {
     state = {
@@ -42,14 +43,18 @@ class Auth extends Component {
         }
 
         return (
-            <div>
-                <form>
-                    <Input />
-                    <Input />
-                    <Button />
-
-                </form>
-            </div>
+            <Fragment>
+                <div className = "tile is-child">
+                    <form>
+                        <Input />
+                        <Input />
+                        <Button />
+                    </form>
+                </div>
+                <div className = "tile is-child">
+                    <h1>This Is A Test</h1>
+                </div>
+            </Fragment>
         );
     }
 }
