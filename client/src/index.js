@@ -3,12 +3,12 @@
 //==============================================================================
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createStore } from 'redux';
 import {
     BrowserRouter as Router,
     Route,
     Link,
-    Switch,
-    Redirect
+    Switch
   } from 'react-router-dom'
 
 //==============================================================================
@@ -18,18 +18,24 @@ import 'bulma/css/bulma.css';
 import './index.css';
 
 //==============================================================================
-//Import Pages
+//Import Reducers & Pages
 //==============================================================================
-//Import Sign On Page
-import Auth from './auth/Auth';
+//Reducers
+import reducers from './reducers';
+//Pages
+import Signin from './auth/Signin';
+import Signup from './auth/Signup';
 
 //==============================================================================
 //Render Webpage
 //==============================================================================
 ReactDOM.render(
-<Router>
-    <Switch>
-        <Route exact path = "/" component = {Auth} />
-    </Switch>
-</Router>
-, document.getElementById('root'));
+<Provider store = {createStore(reducers, {})}>    
+    <Router>
+        <Switch>
+            <Route exact path = "/" component = {Signin} />
+            <Route path = "/signup" component = {Signup} />
+        </Switch>
+    </Router>
+</Provider>, 
+document.getElementById('root'));

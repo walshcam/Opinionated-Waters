@@ -11,7 +11,7 @@ import Input from "../components/UI/Input/Input";
 import Button from "../components/UI/Button/Button";
 import AuthWrapper from './AuthWrapper/AuthWrapper';
 
-class Auth extends Component {
+class Signup extends Component {
     state = {
         email: {
             elementType: 'input',
@@ -55,6 +55,7 @@ class Auth extends Component {
         return (
             <AuthWrapper>
                 <div className = "tile is-child box">
+                    <h1 className = "title">New User</h1>
                     <form>
                         <Input
                         type = {"email"} 
@@ -66,13 +67,9 @@ class Auth extends Component {
                         />
                         <div className = "level">
                             <div className = "level-left">
-                                <Button 
-                                text = {"Submit"}
-                                />
-                            </div>
-                            <div className = "level-right">
                                 <Button
-                                text = {"New User"}
+                                link = {"/signin"} 
+                                text = {"Submit"}
                                 />
                             </div>
                         </div>
@@ -86,4 +83,4 @@ class Auth extends Component {
     }
 }
 
-export default Auth;
+export default Signup;
