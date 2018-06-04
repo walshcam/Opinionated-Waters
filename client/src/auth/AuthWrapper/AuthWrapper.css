@@ -1,8 +1,6 @@
-/* .is-centered {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-} */
+#root {
+    background: url("./action-beach-carribean-240513.jpg") no-repeat fixed center;
+}
 
 .is-height {
     height: 100vh;
