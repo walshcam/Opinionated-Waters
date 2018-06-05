@@ -26,6 +26,7 @@ import reducers from './reducers';
 //Pages
 import Signin from './components/auth/Signin';
 import Signup from './components/auth/Signup';
+import Signout from './components/auth/Signout';
 import Feature from './components/feature/Feature';
 
 //==============================================================================
@@ -46,6 +47,7 @@ ReactDOM.render(
         <Switch>
             <Route exact path = "/" component = {Signin} />
             <Route path = "/signup" component = {Signup} />
+            <Route path = "/signout" component = {Signout} />
             <Route path = "/feature" component = {Feature} />
         </Switch>
     </Router>

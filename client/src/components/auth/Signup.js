@@ -14,7 +14,7 @@ import Button from "../UI/Button/Button";
 import AuthWrapper from './AuthWrapper/AuthWrapper';
 
 class Signup extends Component {
-    
+    //This fires the signup action
     onSubmit = (formProps) => {
         this.props.signup(formProps, () => {
             this.props.history.push('/feature');
@@ -66,11 +66,12 @@ class Signup extends Component {
     }
 }
 
-function mapStateTOProps(state) {
+//This fires the error message from the action component
+function mapStateToProps(state) {
     return { errorMessage: state.auth.errorMessage };
 }
 
 export default compose(
-    connect(mapStateTOProps, actions),
+    connect(mapStateToProps, actions),
     reduxForm({ form: 'signup' })
 )(Signup); 

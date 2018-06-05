@@ -1,9 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import requireAuth from '../requireAuth';
+
+import Navbar from "../UI/Navbar/Navbar";
 
 class Feature extends Component {
     render() {
-        return <div>Hey There! I'm a secret!</div>
+        return (
+            <Fragment>
+                <Navbar />
+                <div>Hey There! I'm a secret!</div>
+            </Fragment>
+        )
     }
 }
 
