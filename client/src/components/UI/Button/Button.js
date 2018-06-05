@@ -1,9 +1,9 @@
 import React from "react";
-import { Link } from 'react-router-dom'
 
 const Button = (props) => (
-    <a className = "button is-large content is-primary">
-        <Link to = {props.link}>{props.text}</Link></a>
+    <button className = "button is-large content is-primary">
+        {props.text}
+    </button>
 )
 
 export default Button;

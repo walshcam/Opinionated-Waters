@@ -2,72 +2,48 @@
 //Import Packages Required For App
 //==============================================================================
 import React, { Component } from 'react';
+import { reduxForm, Field } from 'redux-form';
 
 //==============================================================================
 //Import Components
 //==============================================================================
-import Input from "../components/UI/Input/Input";
 import Button from "../components/UI/Button/Button";
 import AuthWrapper from './AuthWrapper/AuthWrapper';
 
 class Signup extends Component {
-    state = {
-        email: {
-            elementType: 'input',
-            elementConfig: {
-                type: 'email',
-                placeholder: 'Your Email'
-            },
-            value: '',
-            validation: {
-                required: true,
-                isEmail: true
-            },
-            valid: false,
-            touched: false
-        },
-        password: {
-            elementType: 'input',
-            elementConfig: {
-                type: 'password',
-                placeholder: 'Password'
-            },
-            value: '',
-            validation: {
-                required: true,
-                minLength: 7
-            },
-            valid: false,
-            touched: false
-        }
-    }
     
+    onSubmit = (formProps) => {
+        console.log(formProps);
+    };
+
     render () {
-        const formElementsArray = [];
-        for (let key in this.state.orderForm) {
-            formElementsArray.push({
-                id: key,
-                config: this.state.orderForm[key]
-            });
-        }
+        //Supplied by redux-form
+        const { handleSubmit } = this.props;
 
         return (
             <AuthWrapper>
                 <div className = "tile is-child box">
                     <h1 className = "title">New User</h1>
-                    <form>
-                        <Input
-                        type = {"email"} 
-                        placeholder = {"Email"}
+                    <form onSubmit = {handleSubmit(this.onSubmit)}>
+                        <Field
+                            name = "email"
+                            className = "input content is-large"
+                            type = "text"
+                            component = "input"
+                            placeholder = "Email"
+                            autoComplete = "none"
                         />
-                        <Input 
-                        type = {"password"}
-                        placeholder = {"Password"}
+                        <Field
+                            name = "password"
+                            className = "input content is-large"
+                            type = "password"
+                            component = "input"
+                            placeholder = "Password"
+                            autoComplete = "none"
                         />
                         <div className = "level">
                             <div className = "level-left">
                                 <Button
-                                link = {"/"} 
                                 text = {"Submit"}
                                 />
                             </div>
@@ -82,4 +58,4 @@ class Signup extends Component {
     }
 }
 
-export default Signup;
+export default reduxForm({ form: 'signup' })(Signup);
