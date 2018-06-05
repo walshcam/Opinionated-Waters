@@ -3,11 +3,13 @@
 //==============================================================================
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
+import { connect } from 'react-redux';
+import * as actions from "../../actions"
 
 //==============================================================================
 //Import Components
 //==============================================================================
-import Button from "../components/UI/Button/Button";
+import Button from "../UI/Button/Button";
 import AuthWrapper from './AuthWrapper/AuthWrapper';
 
 class Signin extends Component {

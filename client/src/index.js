@@ -24,8 +24,8 @@ import './index.css';
 //Reducers
 import reducers from './reducers';
 //Pages
-import Signin from './auth/Signin';
-import Signup from './auth/Signup';
+import Signin from './components/auth/Signin';
+import Signup from './components/auth/Signup';
 
 //==============================================================================
 //Render Webpage
