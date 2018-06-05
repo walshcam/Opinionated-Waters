@@ -26,13 +26,17 @@ import reducers from './reducers';
 //Pages
 import Signin from './components/auth/Signin';
 import Signup from './components/auth/Signup';
+import Feature from './components/feature/Feature';
 
 //==============================================================================
 //Render Webpage
 //==============================================================================
 const store = createStore(
     reducers,
-    {},
+    //this retrieves any authenticated tokens from local storage so refresh works
+    {
+        auth: { authenticated: localStorage.getItem('token') }
+    },
     applyMiddleware(reduxThunk)
 );
 
@@ -42,6 +46,7 @@ ReactDOM.render(
         <Switch>
             <Route exact path = "/" component = {Signin} />
             <Route path = "/signup" component = {Signup} />
+            <Route path = "/feature" component = {Feature} />
         </Switch>
     </Router>
 </Provider>, 

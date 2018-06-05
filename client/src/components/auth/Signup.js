@@ -16,7 +16,10 @@ import AuthWrapper from './AuthWrapper/AuthWrapper';
 class Signup extends Component {
     
     onSubmit = (formProps) => {
-        this.props.signup(formProps);
+        this.props.signup(formProps, () => {
+            this.props.history.push('/feature');
+        });
+
     };
 
     render () {
@@ -51,17 +54,23 @@ class Signup extends Component {
                                 />
                             </div>
                         </div>
+                        <div className = "level">
+                            <div className = "level-item">
+                                <p className = "level-item">{this.props.errorMessage}</p>
+                            </div>
+                        </div>
                     </form>
-                </div>
-                <div className = "tile is-child">
-                    <h1>This Is A Test</h1>
                 </div>
             </AuthWrapper>
         );
     }
 }
 
+function mapStateTOProps(state) {
+    return { errorMessage: state.auth.errorMessage };
+}
+
 export default compose(
-    connect(null, actions),
+    connect(mapStateTOProps, actions),
     reduxForm({ form: 'signup' })
 )(Signup); 

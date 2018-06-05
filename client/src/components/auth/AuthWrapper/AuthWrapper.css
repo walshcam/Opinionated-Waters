@@ -1,4 +1,6 @@
-#root {
+.background-wrapper {
+    width: 100vw;
+    height: 101vh;
     background: url("./action-beach-carribean-240513.jpg") no-repeat fixed center;
 }
 
