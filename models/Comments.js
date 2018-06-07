@@ -25,6 +25,11 @@ const CommentsSchema = new Schema({
     paragraph: {
         type: String,
         required: true
+    },
+    // Save the date so that comments are sorted  
+    date: {
+        type: Date,
+        default: Date.now
     }
 });
 

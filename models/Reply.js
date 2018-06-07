@@ -11,8 +11,8 @@ const ReplySchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User"
     },
-    // `place_id` is required and of type Integer
-    _commentid: {
+    // `_commentId` is required and of type string
+    _commentId: {
         type: Schema.Types.ObjectId,
         ref: "Comments"
     },
@@ -25,6 +25,11 @@ const ReplySchema = new Schema({
     paragraph: {
         type: String,
         required: true
+    },
+    // Save the date so that replies are sorted  
+    date: {
+        type: Date,
+        default: Date.now
     }
 });
 

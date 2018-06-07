@@ -2,5 +2,6 @@
 
 module.exports = {
     User: require("./User"),
-    Comments: require("./Comments")
+    Comments: require("./Comments"),
+    Reply: require("./Reply")
   };
