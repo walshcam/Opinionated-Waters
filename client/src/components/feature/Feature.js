@@ -65,6 +65,7 @@ class Feature extends Component {
         })
     }
 
+    //This alters the geoJSON when needed
     geoJSONData = (key, data, style) => {
         return(
         <GeoJSON
@@ -74,6 +75,7 @@ class Feature extends Component {
         />)
     }
 
+    //This changes the map based on the search query
     mapSearchHandler = () => {
         //Format Input For API call
         let correctedLocation = [...this.state.rawLocation];
@@ -102,7 +104,7 @@ class Feature extends Component {
                     bounds: latLngBounds(viewbox1,viewbox2),
                     displayName: data.display_name,
                     featureType: data.type,
-                    featureID: data.place_id,
+                    featureID: parseInt(data.place_id),
                     geoJsonData: {
                         "type":"FeatureCollection",
                         "features": [
@@ -133,8 +135,7 @@ class Feature extends Component {
                 <div className = "container">
                     <section className = "section">
                         <MapComponent>
-                            <LeafletMap
-                                id = "LeafletMap" 
+                            <LeafletMap 
                                 bounds = {this.state.bounds}
                                 useFlyTo = {true}
                             > 

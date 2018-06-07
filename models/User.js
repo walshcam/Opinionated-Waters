@@ -2,8 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt-nodejs');
 
-
-//********** DEFINE OUR MODEL *********
+//==============================================================================
+//Define Our Model
+//==============================================================================
 
 const userSchema = new Schema({
     email: { 
@@ -14,8 +15,10 @@ const userSchema = new Schema({
     password: String
 });
 
-//********** ENCRYPTION **********
-    //Use Bcrypt-nodejs to salt and hash password
+//==============================================================================
+//Encryption
+//==============================================================================
+//Use Bcrypt-nodejs to salt and hash password
 
 //Before saving a new model, run this function
 userSchema.pre('save', function(next){
@@ -47,12 +50,14 @@ userSchema.methods.comparePassword = function(candidatePassword, callback) {
     });
 }
 
-//********** CREATE THE MODEL CLASS **********
+//==============================================================================
+//Create The Model Class
+//==============================================================================
 
 const ModelClass = mongoose.model('user', userSchema);
 
-
-
-//********** EXPORT THE MODEL **********
+//==============================================================================
+//Export The Model
+//==============================================================================
 
 module.exports = ModelClass;
