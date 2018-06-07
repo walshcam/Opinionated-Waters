@@ -6,6 +6,26 @@ import { AUTH_USER, AUTH_ERROR } from './types';
 //==============================================================================
 
 //This is used when the onSubmit function is called
+export const signin = (formProps, callback) => async dispatch => {
+    try{
+        //Await is used to ensure this action is taken before moving forward
+        const response = await axios.post('http://localhost:3001/signin', formProps);
+
+        dispatch({ type: AUTH_USER, payload: response.data.token });
+        //This saves the token to local storage
+        localStorage.setItem('token', response.data.token);
+        //The callback is to redirect the user to the content page
+        callback();
+    } catch(error) {
+        dispatch({ type: AUTH_ERROR, payload: 'Invalid Login' });
+    }
+};
+
+//==============================================================================
+//Action Upon Signup Of New User
+//==============================================================================
+
+//This is used when the onSubmit function is called
 export const signup = (formProps, callback) => async dispatch => {
     try{
         //Await is used to ensure this action is taken before moving forward

@@ -3,6 +3,8 @@
 //==============================================================================
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
+import { Link } from 'react-router-dom';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from "../../actions"
 
@@ -13,14 +15,17 @@ import Button from "../UI/Button/Button";
 import AuthWrapper from './AuthWrapper/AuthWrapper';
 
 class Signin extends Component {
-
+    //This fires the signin action
     onSubmit = (formProps) => {
-        console.log(formProps);
-    }
-    
+        this.props.signin(formProps, () => {
+            this.props.history.push('/feature');
+        });
+
+    };
+
     render () {
-        //Supplied by redux form
-        const{ handleSubmit } = this.props;
+        //Supplied by redux-form
+        const { handleSubmit } = this.props;
 
         return (
             <AuthWrapper>
@@ -46,23 +51,35 @@ class Signin extends Component {
                         <div className = "level">
                             <div className = "level-left">
                                 <Button
-                                text = {"Submit"}
+                                    text = {"Submit"}
                                 />
                             </div>
                             <div className = "level-right">
-                                <Button
-                                text = {"New User"}
-                                />
+                                <Link to = "/signup">
+                                    <Button
+                                        text = {"Sign Up!"}
+                                    />
+                                </Link>
+                            </div>
+                        </div>
+                        <div className = "level">
+                            <div className = "level-item">
+                                <p className = "level-item">{this.props.errorMessage}</p>
                             </div>
                         </div>
                     </form>
-                </div>
-                <div className = "tile is-child">
-                    <h1>This Is A Test</h1>
                 </div>
             </AuthWrapper>
         );
     }
 }
 
-export default reduxForm({ form: 'signin' })(Signin);
+//This fires the error message from the action component
+function mapStateToProps(state) {
+    return { errorMessage: state.auth.errorMessage };
+}
+
+export default compose(
+    connect(mapStateToProps, actions),
+    reduxForm({ form: 'signin' })
+)(Signin); 
