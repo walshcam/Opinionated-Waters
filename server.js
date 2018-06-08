@@ -36,6 +36,11 @@ app.use(bodyParser.json({ type: '*/*' }));
 //Use CORS for testing purposes
 // app.use(cors());
 
+//Allow for access to the build file in heroku
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static('client/build'));
+}
+
 //==============================================================================
 //Routes
 //==============================================================================
@@ -45,8 +50,9 @@ require("./routes/comments-routes")(app);
 require("./routes/reply-routes")(app);
 // require("./routes/html-routes")(app);
 
-app.use(express.static('./client'));
-
+app.get('*', function (req, res) {
+    res.sendFile(path.join(__dirname, "/client/build/index.html"));
+})
 //==============================================================================
 //Server Setup
 //==============================================================================
