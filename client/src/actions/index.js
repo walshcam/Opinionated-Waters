@@ -9,7 +9,10 @@ import { AUTH_USER, AUTH_ERROR } from './types';
 export const signin = (formProps, callback) => async dispatch => {
     try{
         //Await is used to ensure this action is taken before moving forward
-        const response = await axios.post('https://opinwater.herokuapp.com/signin', formProps);
+            //HEROKU DEPLOYMENT
+        // const response = await axios.post('https://opinwater.herokuapp.com/signin', formProps);
+            //LOCAL DEPLOYMENT
+        const response = await axios.post('http://localhost:3001/signin', formProps);
 
         dispatch({ type: AUTH_USER, payload: response.data.token });
         //This saves the token to local storage
@@ -29,7 +32,10 @@ export const signin = (formProps, callback) => async dispatch => {
 export const signup = (formProps, callback) => async dispatch => {
     try{
         //Await is used to ensure this action is taken before moving forward
-        const response = await axios.post('https://opinwater.herokuapp.com/signup', formProps);
+            //HEROKU DEPLOYMENT
+        // const response = await axios.post('https://opinwater.herokuapp.com/signup', formProps);
+            //LOCAL DEPLOYMENT
+        const response = await axios.post('http://localhost:3001/signup', formProps);
 
         dispatch({ type: AUTH_USER, payload: response.data.token });
         //This saves the token to local storage

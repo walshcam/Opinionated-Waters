@@ -12,6 +12,7 @@ import { latLngBounds } from 'leaflet';
 import Navbar from "../UI/Navbar/Navbar";
 import MapComponent from "../UI/MapComponent/MapComponent";
 import Input from "../UI/Input/Input";
+import CommentForm from "../UI/CommentForm/CommentForm";
 import CommentComponent from "../UI/CommentComponent/CommentComponent";
 
 //Information needed for leaflet
@@ -104,7 +105,7 @@ class Feature extends Component {
                     bounds: latLngBounds(viewbox1,viewbox2),
                     displayName: data.display_name,
                     featureType: data.type,
-                    featureID: parseInt(data.place_id),
+                    featureID: parseInt(data.place_id, 16),
                     geoJsonData: {
                         "type":"FeatureCollection",
                         "features": [
@@ -160,7 +161,7 @@ class Feature extends Component {
         axios.delete("/feature/"+selectedComment._id)
             .then(response => {
                 console.log(response);
-                this.commentsGetHandler;
+                this.commentsGetHandler();
             })
             .catch(error => {
                 console.log(error);
@@ -191,7 +192,7 @@ class Feature extends Component {
                             </LeafletMap>
                         </MapComponent>
                     </section>
-                    <section>
+                    <section className = "section">
                         <Input
                             input = {this.state.rawLocation} 
                             updateInput = {this.inputHandler}
@@ -202,8 +203,13 @@ class Feature extends Component {
                             Search
                         </button>
                     </section>
+                    <CommentForm 
+                        buttonText = {"Submit"}
+                    />
                     <section className = "section">
-                        <CommentComponent />
+                        <CommentComponent 
+                            featureID = {this.state.featureID}
+                        />
                     </section>
                 </div>
             </Fragment>

@@ -40,17 +40,19 @@ if (process.env.NODE_ENV === "production") {
 require("./routes/authentication-routes")(app);
 require("./routes/comments-routes")(app);
 require("./routes/reply-routes")(app);
-// require("./routes/html-routes")(app);
+    //LocalHost Only!
+require("./routes/html-routes")(app);
 
-app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, "/client/build/index.html"));
-})
+    //Heroku Only!
+// app.get('/', function (req, res) {
+//     res.sendFile(path.join(__dirname, "/client/build/index.html"));
+// })
+
 //==============================================================================
 //Server Setup
 //==============================================================================
 
 // Specify Database (Production || Local)
-// const MONGODB_URI = "mongodb://localhost:auth/auth";
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/auth";
 
 // Connect to the Mongo DB
