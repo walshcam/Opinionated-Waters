@@ -10,7 +10,7 @@ const requireAuth = passport.authenticate('jwt', { session: false });
 module.exports = function(app) {
     //require authentication before ('/') get request with requireAuth
     // Define any API routes before this runs
-    app.get("/", function(req, res) {
+    app.get("*", function(req, res) {
         res.sendFile(path.join(__dirname, "./client/build/index.html"));
     });
 }
