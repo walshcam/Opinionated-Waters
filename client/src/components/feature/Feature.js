@@ -125,6 +125,49 @@ class Feature extends Component {
     }
 
 //==============================================================================
+//Comments Section
+//==============================================================================
+
+    //Load initial comments
+    commentsGetHandler = () => {
+        axios.get("/feature")
+            .then(response => {
+                console.log(response);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
+
+    //Save New Comment
+    newCommentsPostHandler = () => {
+        axios.post("/feature/:id", {
+                //Data To Be Posted Goes Here
+                place_id: this.state.featureID,
+                heading: "Heading Goes Here",
+                paragraph: "The Comment Goes Here",
+            })
+            .then(response => {
+                console.log(response);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
+
+    //Delete Comment (Yours Only)
+    CommentsDeleteHandler = (selectedComment) => {
+        axios.delete("/feature/"+selectedComment._id)
+            .then(response => {
+                console.log(response);
+                this.commentsGetHandler;
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
+
+//==============================================================================
 //Render Webpage
 //==============================================================================
     render() {

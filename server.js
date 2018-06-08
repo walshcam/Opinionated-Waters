@@ -39,8 +39,10 @@ app.use(cors());
 //Routes
 //==============================================================================
 
-require("./routes/html-routes.js")(app);
-require("./routes/authentication-routes.js")(app);
+require("./routes/html-routes")(app);
+require("./routes/comments-routes")(app);
+require("./routes/reply-routes")(app);
+require("./routes/authentication-routes")(app);
 
 //==============================================================================
 //Server Setup

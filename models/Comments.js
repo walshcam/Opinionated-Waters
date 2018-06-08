@@ -13,7 +13,7 @@ const CommentsSchema = new Schema({
     },
     // `place_id` is required and of type Integer
     place_id: {
-        type: Int16Array,
+        type: Number,
         required: true
     },
     // `title` is required and of type String
@@ -34,7 +34,7 @@ const CommentsSchema = new Schema({
 });
 
 // This creates our model from the above schema, using mongoose's model method
-const Comments = mongoose.model("comments", ArticleSchema);
+const Comments = mongoose.model("comments", CommentsSchema);
 
 // Export the Article model
 module.exports = Comments;
