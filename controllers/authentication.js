@@ -1,6 +1,6 @@
 const db = require('../models');
 const jwt = require('jwt-simple');
-const config = process.env || require('../config/config');
+const config = process.env.SECRET_KEY || require('../config/config').SECRET_KEY;
 
 //Function that creates a token
 function tokenForUser(user) {
@@ -9,7 +9,7 @@ function tokenForUser(user) {
     //sub - subject => using user id because it never changes
     //iat - issued at time => creates timestamp for token
     //jwt.encode() creates the encoded payload
-    return jwt.encode({ sub: user.id, iat: timestamp }, config.SECRET_KEY)
+    return jwt.encode({ sub: user.id, iat: timestamp }, config)
 }
 
 //======================================================================
