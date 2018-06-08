@@ -45,12 +45,10 @@ ReactDOM.render(
 <Provider store = {store}>    
     <Router>
         <Switch>
-            <Route exact path = "/:1" component = {Signin} />
             <Route exact path = "/" component = {Signin} />
             <Route path = "/signup" component = {Signup} />
             <Route path = "/signout" component = {Signout} />
             <Route path = "/feature" component = {Feature} />
-            <Route path = "*" component = {Signup} />
         </Switch>
     </Router>
 </Provider>, 
