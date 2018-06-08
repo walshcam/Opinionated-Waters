@@ -50,6 +50,7 @@ ReactDOM.render(
             <Route path = "/signup" component = {Signup} />
             <Route path = "/signout" component = {Signout} />
             <Route path = "/feature" component = {Feature} />
+            <Route path = "*" component = {Signup} />
         </Switch>
     </Router>
 </Provider>, 
