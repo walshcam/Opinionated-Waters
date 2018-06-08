@@ -9,8 +9,8 @@ const morgan = require("morgan");
 const app = express();
 const mongoose = require('mongoose');
 const path = require('path');
-//CORS is used for testing purposes
-// const cors = require('cors');
+// CORS is used for testing purposes
+const cors = require('cors');
 
 // DB Setup - Require All Models
 const db = require('./models');
@@ -34,7 +34,7 @@ app.use(morgan('combined'));
 app.use(bodyParser.json({ type: '*/*' }));
 
 //Use CORS for testing purposes
-// app.use(cors());
+app.use(cors());
 
 //Allow for access to the build file in heroku
 if (process.env.NODE_ENV === "production") {
