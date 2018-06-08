@@ -8,6 +8,7 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const app = express();
 const mongoose = require('mongoose');
+const path = require('path');
 //CORS is used for testing purposes
 // const cors = require('cors');
 
@@ -42,7 +43,11 @@ app.use(bodyParser.json({ type: '*/*' }));
 require("./routes/authentication-routes")(app);
 require("./routes/comments-routes")(app);
 require("./routes/reply-routes")(app);
-require("./routes/html-routes")(app);
+// require("./routes/html-routes")(app);
+
+app.get("*", function(req, res) {
+    res.sendFile(path.join(__dirname, "./../client/build/index.html"));
+});
 
 //==============================================================================
 //Server Setup
