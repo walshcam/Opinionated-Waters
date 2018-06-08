@@ -45,7 +45,7 @@ require("./routes/comments-routes")(app);
 require("./routes/reply-routes")(app);
 // require("./routes/html-routes")(app);
 
-app.use(express.static(__dirname + './client/build'));
+app.use(express.static(__dirname + '/client'));
 
 //==============================================================================
 //Server Setup
