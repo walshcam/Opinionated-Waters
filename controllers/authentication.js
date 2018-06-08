@@ -1,6 +1,6 @@
 const db = require('../models');
 const jwt = require('jwt-simple');
-const config = require('../config/config');
+const config = process.env.DATABASE_URL || require('../config/config');
 
 //Function that creates a token
 function tokenForUser(user) {
