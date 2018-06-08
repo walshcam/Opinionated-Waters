@@ -15,14 +15,6 @@ const cors = require('cors');
 // DB Setup - Require All Models
 const db = require('./models');
 
-// Specify Database (Production || Local)
-// const MONGODB_URI = "mongodb://localhost:auth/auth";
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/auth";
-
-// Connect to the Mongo DB
-mongoose.connect(MONGODB_URI);
-
-
 //==============================================================================
 //App Setup
 //==============================================================================
@@ -56,6 +48,13 @@ app.get('/', function (req, res) {
 //==============================================================================
 //Server Setup
 //==============================================================================
+
+// Specify Database (Production || Local)
+// const MONGODB_URI = "mongodb://localhost:auth/auth";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/auth";
+
+// Connect to the Mongo DB
+mongoose.connect(MONGODB_URI);
 
 //Specify Port
 const PORT = process.env.PORT || 3001;
