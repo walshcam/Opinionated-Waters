@@ -39,10 +39,10 @@ app.use(bodyParser.json({ type: '*/*' }));
 //Routes
 //==============================================================================
 
+require("./routes/authentication-routes")(app);
 require("./routes/comments-routes")(app);
 require("./routes/reply-routes")(app);
 require("./routes/html-routes")(app);
-require("./routes/authentication-routes")(app);
 
 //==============================================================================
 //Server Setup
