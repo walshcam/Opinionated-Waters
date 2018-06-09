@@ -1,8 +1,8 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Button from "./../Button/Button"
 
 const CommentForm = (props) => (
-    <section className = "section">
+    <Fragment>
         {/* Heading Input */}
         <div class = "field">
             <label class = "label">Heading Input</label>
@@ -24,7 +24,7 @@ const CommentForm = (props) => (
                 text = {props.buttonText}
             />
         </div>
-    </section>
+    </Fragment>
 );
 
 
