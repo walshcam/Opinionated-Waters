@@ -9,11 +9,13 @@ import axios from 'axios';
 import { Map as LeafletMap, TileLayer, GeoJSON } from 'react-leaflet';
 import { latLngBounds } from 'leaflet';
 //Components Required
+import Section from "../UI/Section/Section";
 import Navbar from "../UI/Navbar/Navbar";
 import MapComponent from "../UI/MapComponent/MapComponent";
 import Input from "../UI/Input/Input";
-import CommentForm from "../UI/CommentForm/CommentForm";
-import CommentComponent from "../UI/CommentComponent/CommentComponent";
+//Comment Components
+import CommentForm from "../UI/CommentSection/CommentForm/CommentForm";
+import CommentComponent from "../UI/CommentSection/CommentComponent/CommentComponent";
 
 //Information needed for leaflet
 const attribution = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
@@ -177,7 +179,7 @@ class Feature extends Component {
             <Fragment>
                 <Navbar />
                 <div className = "container">
-                    <section className = "section">
+                    <Section>
                         <MapComponent>
                             <LeafletMap 
                                 bounds = {this.state.bounds}
@@ -191,8 +193,8 @@ class Feature extends Component {
                                 {this.geoJSONData(this.state.geoJsonKey, this.state.geoJsonData, waterFeatureStyle)}
                             </LeafletMap>
                         </MapComponent>
-                    </section>
-                    <section className = "section">
+                    </Section>
+                    <Section>
                         <Input
                             input = {this.state.rawLocation} 
                             updateInput = {this.inputHandler}
@@ -202,15 +204,17 @@ class Feature extends Component {
                         <button onClick = {this.mapSearchHandler} className = "button is-large content is-primary">
                             Search
                         </button>
-                    </section>
-                    <CommentForm 
-                        buttonText = {"Submit"}
-                    />
-                    <section className = "section">
+                    </Section>
+                    <Section>
+                        <CommentForm 
+                            buttonText = {"Submit"}
+                        />
+                    </Section>
+                    <Section>
                         <CommentComponent 
                             featureID = {this.state.featureID}
                         />
-                    </section>
+                    </Section>
                 </div>
             </Fragment>
         )
