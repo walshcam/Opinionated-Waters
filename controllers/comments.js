@@ -6,7 +6,7 @@ module.exports = {
     // Find Our Comments
     find: function(req, res) {
         db.Comments
-        .find({ _userId: req.params.id })
+        .find({ place_id: req.params.id })
         .sort({ date: -1 })
         .then(function(dbComments){
             res.json(dbComments);
@@ -14,9 +14,10 @@ module.exports = {
     },
     // Create A New Comment
     create: function(req, res) {
-        db.Comments.create(req.body).then(function(dbComments) {
-            res.json(dbComment);
-        });
+        db.Comments.create(req.body)
+            .then(function(dbComments) {
+                res.json(dbComments);
+            });
     },
     // Delete A Comment With A Given ID
     delete: function(req, res) {

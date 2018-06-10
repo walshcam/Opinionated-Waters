@@ -13,6 +13,7 @@ import Section from "../UI/Section/Section";
 import Navbar from "../UI/Navbar/Navbar";
 import MapComponent from "../UI/MapComponent/MapComponent";
 import Input from "../UI/Input/Input";
+import Button from "../UI/Button/Button";
 //Comment Components
 import CommentForm from "../UI/CommentSection/CommentForm/CommentForm";
 import CommentComponent from "../UI/CommentSection/CommentComponent/CommentComponent";
@@ -32,7 +33,7 @@ const waterFeatureStyle = {
 
 class Feature extends Component {
 //==============================================================================
-//Render Map
+//State
 //==============================================================================
     state = {
         bounds: latLngBounds([27, -81], [29, -80]),
@@ -41,7 +42,7 @@ class Feature extends Component {
         //Nominatim Output
         displayName: "",
         featureType: "",
-        featureID: 0,
+        featureID: "",
         //Bounding Box and its corrections
         geoJsonKey: 0,
         geoJsonData: {
@@ -56,8 +57,17 @@ class Feature extends Component {
                     }
                 }
             ]
-        }
+        },
+
+        //New Comment Data
+        heading: "",
+        paragraph: "",
+        comments: []
     }
+
+//==============================================================================
+//Map Functions
+//==============================================================================
 
     //This handles the input field for the map search.
     inputHandler = (event) => {
@@ -107,7 +117,7 @@ class Feature extends Component {
                     bounds: latLngBounds(viewbox1,viewbox2),
                     displayName: data.display_name,
                     featureType: data.type,
-                    featureID: parseInt(data.place_id, 16),
+                    featureID: data.place_id,
                     geoJsonData: {
                         "type":"FeatureCollection",
                         "features": [
@@ -123,6 +133,8 @@ class Feature extends Component {
                     },
                     geoJsonKey: key
                 })
+                //Get comments after each search
+                this.commentsGetHandler();
             })
             .catch(error => console.log(error))
     }
@@ -131,38 +143,76 @@ class Feature extends Component {
 //Comments Section
 //==============================================================================
 
+//Comments onChange Handlers
+//============================
+
+    headingChange = (event) => {
+        this.setState({heading: event.target.value})
+    }
+
+    commentChange = (event) => {
+        this.setState({paragraph: event.target.value})
+    }
+
+//Comments Axios
+//============================
+
+    //Load Initial Comments
+    componentDidMount() {
+        this.commentsGetHandler();
+    }
+
     //Load initial comments
     commentsGetHandler = () => {
-        axios.get("/feature")
-            .then(response => {
-                console.log(response);
-            })
-            .catch(error => {
-                console.log(error);
-            })
+        axios({
+            method: 'get',
+            url: `http://localhost:3001/feature/${this.state.featureID}`,
+            headers: {
+                authorization: localStorage.getItem('token')
+            }
+        })
+        .then(response => {
+            console.log(response);
+            this.setState({
+                comments: response.data
+            });
+        })
+        .catch(error => {
+            console.log(error);
+        })
     }
 
     //Save New Comment
     newCommentsPostHandler = () => {
-        axios.post("/feature/:id", {
-                //Data To Be Posted Goes Here
+        axios({
+            method: 'post',
+            url: `http://localhost:3001/feature/${this.state.featureID}`,
+            headers: {
+                authorization: localStorage.getItem('token')
+            },
+            data: {
                 place_id: this.state.featureID,
-                heading: "Heading Goes Here",
-                paragraph: "The Comment Goes Here",
-            })
-            .then(response => {
-                console.log(response);
-            })
-            .catch(error => {
-                console.log(error);
-            })
+                heading: this.state.heading,
+                paragraph: this.state.paragraph
+            }
+        })
+        .then(response => {
+            console.log(response);
+            // this.commentsGetHandler();
+        })
+        .catch(error => {
+            console.log(error);
+        })
     }
 
     //Delete Comment (Yours Only)
     CommentsDeleteHandler = (selectedComment) => {
-        axios.delete("/feature/"+selectedComment._id)
+        axios.delete("http://localhost:3001/feature/"+selectedComment._id)
             .then(response => {
                 console.log(response);
+                this.setState({
+                    paragraph: response.data
+                });
                 this.commentsGetHandler();
             })
             .catch(error => {
@@ -201,18 +251,24 @@ class Feature extends Component {
                             type = {"text"}
                             placeholder = {"Lake Michigan"}
                         />
-                        <button onClick = {this.mapSearchHandler} className = "button is-large content is-primary">
-                            Search
-                        </button>
-                    </Section>
-                    <Section>
-                        <CommentForm 
-                            buttonText = {"Submit"}
+                        <Button 
+                            onClick = {this.mapSearchHandler} 
+                            text = {"Search"}
                         />
                     </Section>
                     <Section>
-                        <CommentComponent 
-                            featureID = {this.state.featureID}
+                        <CommentForm 
+                            headingText = {this.state.heading}
+                            headingOnChange = {this.headingChange}
+                            commentOnChange = {this.commentChange}
+                            buttonText = {"Submit"}
+                            onClick = {this.newCommentsPostHandler}
+                        />
+                    </Section>
+                    <Section>
+                        <CommentComponent
+                            getComments = {this.state.comments} 
+                            deleteComments = {() => this.CommentsDeleteHandler()}
                         />
                     </Section>
                 </div>

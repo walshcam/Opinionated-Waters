@@ -4,24 +4,37 @@ import Button from "./../../Button/Button"
 const CommentForm = (props) => (
     <Fragment>
         {/* Heading Input */}
-        <div class = "field">
-            <label class = "label">Heading Input</label>
-            <div class = "control">
-                <input class = "input" type = "text" placeholder = "New Comment Heading!" />
+        <div className = "field">
+            <label className = "label">Heading Input</label>
+            <div className = "control">
+                <input 
+                    className = "input" 
+                    type = "text" 
+                    placeholder = "New Comment Heading!" 
+                    onChange = {props.headingOnChange}
+                    value = {props.headingText}
+                />
             </div>
         </div>
 
         {/* Comment Textbox */}
-        <div class="field">
-            <label class="label">Comment</label>
-            <div class="control">
-                <textarea class="textarea" placeholder="New Comment"></textarea>
+        <div className="field">
+            <label className="label">Comment</label>
+            <div className="control">
+                <textarea 
+                    className="textarea" 
+                    placeholder="New Comment"
+                    onChange = {props.commentOnChange}
+                >
+                    {props.value}
+                </textarea>
             </div>
         </div>
 
-        <div class="control">
+        <div className = "control">
             <Button 
                 text = {props.buttonText}
+                onClick = {props.onClick}
             />
         </div>
     </Fragment>
