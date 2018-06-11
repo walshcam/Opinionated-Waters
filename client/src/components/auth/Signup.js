@@ -1,28 +1,64 @@
 //==============================================================================
-//Import Packages Required For App
+//Import Packages and Components Required For App
 //==============================================================================
+//Required Packages
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from "../../actions"
-
-//==============================================================================
-//Import Components
-//==============================================================================
+//Required Components
 import Button from "../UI/Button/Button";
 import AuthWrapper from './AuthWrapper/AuthWrapper';
 
+//==============================================================================
+//Functions and Validation
+//==============================================================================
+
+const renderField = ({
+    input, placeholder, type, className, autoComplete,
+    meta: { touched, error }
+}) => (
+    <div className = "field">
+        <div className = "control">
+            <input {...input} placeholder = {placeholder} type = {type} className = {className} autoComplete = {autoComplete} />
+            {touched && (error && <p className = "help is-danger">{error}</p>)}
+        </div>
+    </div>
+)
+
+//Validation Variables
+//=============================================
+//required
+const required = value => (value ? undefined : 'Required')
+//isEmail
+const emailValidation = value => value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ? 
+"Not an email address" : undefined
+//isLongEnough
+const passwordLength = value => value && value.length < 5 ? 
+"Password must be 6 characters or more" : undefined
+;
+
 class Signup extends Component {
+
+    state = {
+        invalidEmail : "",
+        invalidPassword : ""
+    }
+    
     //This fires the signup action
     onSubmit = (formProps) => {
         this.props.signup(formProps, () => {
             this.props.history.push('/feature');
         });
-
     };
 
+//==============================================================================
+//Rendered Components
+//==============================================================================
+
     render () {
+
         //Supplied by redux-form
         const { handleSubmit } = this.props;
 
@@ -35,18 +71,22 @@ class Signup extends Component {
                             name = "email"
                             className = "input content is-large"
                             type = "text"
-                            component = "input"
+                            component = {renderField}
                             placeholder = "Email"
                             autoComplete = "none"
+                            validate = {[required, emailValidation]}
                         />
+                        <p className = "help is-danger">{this.state.invalidEmail}</p>
                         <Field
                             name = "password"
                             className = "input content is-large"
                             type = "password"
-                            component = "input"
+                            component = {renderField}
                             placeholder = "Password"
                             autoComplete = "none"
+                            validate = {[required, passwordLength]}
                         />
+                        <p className = "help is-danger">{this.state.invalidPassword}</p>
                         <div className = "level">
                             <div className = "level-left">
                                 <Button
