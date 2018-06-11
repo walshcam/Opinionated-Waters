@@ -3,6 +3,7 @@
 //==============================================================================
 //Required Packages
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { reduxForm, Field } from 'redux-form';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -76,7 +77,6 @@ class Signup extends Component {
                             autoComplete = "none"
                             validate = {[required, emailValidation]}
                         />
-                        <p className = "help is-danger">{this.state.invalidEmail}</p>
                         <Field
                             name = "password"
                             className = "input content is-large"
@@ -86,12 +86,18 @@ class Signup extends Component {
                             autoComplete = "none"
                             validate = {[required, passwordLength]}
                         />
-                        <p className = "help is-danger">{this.state.invalidPassword}</p>
                         <div className = "level">
                             <div className = "level-left">
                                 <Button
                                 text = {"Submit"}
                                 />
+                            </div>
+                            <div className = "level-right">
+                                <Link to = "/">
+                                    <Button
+                                        text = {"Existing Account"}
+                                    />
+                                </Link>
                             </div>
                         </div>
                         <div className = "level">

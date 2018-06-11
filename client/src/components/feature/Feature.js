@@ -39,6 +39,8 @@ class Feature extends Component {
         bounds: latLngBounds([27, -81], [29, -80]),
         //Nominatim Input
         rawLocation: "",
+        rawLocation2: "",
+        rawLocation3: "",
         //Nominatim Output
         displayName: "",
         featureType: "",
@@ -78,6 +80,22 @@ class Feature extends Component {
         })
     }
 
+    inputHandler2 = (event) => {
+        const inputValue = event.target.value;
+        
+        this.setState({
+            rawLocation2: inputValue
+        })
+    }
+
+    inputHandler3 = (event) => {
+        const inputValue = event.target.value;
+        
+        this.setState({
+            rawLocation3: inputValue
+        })
+    }
+
     //This alters the geoJSON when needed
     geoJSONData = (key, data, style) => {
         return(
@@ -91,7 +109,8 @@ class Feature extends Component {
     //This changes the map based on the search query
     mapSearchHandler = () => {
         //Format Input For API call
-        let correctedLocation = [...this.state.rawLocation];
+        let correctedLocation = [...this.state.rawLocation].concat([" "],[...this.state.rawLocation2],[" "],[...this.state.rawLocation3]);
+        console.log(correctedLocation);
         //Turn the input into a string and trim any spaces from both ends
         correctedLocation = correctedLocation.join('').trim();
         //Remove any double spaces
@@ -251,6 +270,24 @@ class Feature extends Component {
                             type = {"text"}
                             placeholder = {"Lake Michigan"}
                         />
+                        <div className = "columns">
+                            <div className = "column is-half">
+                                <Input
+                                    input = {this.state.rawLocation2} 
+                                    updateInput = {this.inputHandler2}
+                                    type = {"text"}
+                                    placeholder = {"State or City (Optional)"}
+                                />
+                            </div>
+                            <div className = "column is-half">
+                                <Input
+                                    input = {this.state.rawLocation3} 
+                                    updateInput = {this.inputHandler3}
+                                    type = {"text"}
+                                    placeholder = {"Country (Optional)"}
+                                />
+                            </div>
+                        </div>
                         <Button 
                             onClick = {this.mapSearchHandler} 
                             text = {"Search"}
