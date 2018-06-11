@@ -41,12 +41,12 @@ require("./routes/authentication-routes")(app);
 require("./routes/comments-routes")(app);
 require("./routes/reply-routes")(app);
     //LocalHost Only!
-require("./routes/html-routes")(app);
+// require("./routes/html-routes")(app);
 
     //Heroku Only!
-// app.get('/', function (req, res) {
-//     res.sendFile(path.join(__dirname, "/client/build/index.html"));
-// })
+app.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname, "/client/build/index.html"));
+})
 
 //==============================================================================
 //Server Setup

@@ -196,7 +196,7 @@ class Feature extends Component {
     commentsGetHandler = () => {
         axios({
             method: 'get',
-            url: `http://localhost:3001/feature/${this.state.featureID}`,
+            url: `https://opinwater.herokuapp.com/feature/${this.state.featureID}`,
             headers: {
                 authorization: localStorage.getItem('token')
             }
@@ -216,7 +216,7 @@ class Feature extends Component {
     newCommentsPostHandler = () => {
         axios({
             method: 'post',
-            url: `http://localhost:3001/feature/${this.state.featureID}`,
+            url: `https://opinwater.herokuapp.com/feature/${this.state.featureID}`,
             headers: {
                 authorization: localStorage.getItem('token')
             },
@@ -243,7 +243,7 @@ class Feature extends Component {
 
     //Delete Comment (Yours Only)
     CommentsDeleteHandler = (selectedComment) => {
-        axios.delete("http://localhost:3001/feature/"+selectedComment._id)
+        axios.delete("https://opinwater.herokuapp.com/feature/"+selectedComment._id)
             .then(response => {
                 console.log(response);
                 this.setState({
