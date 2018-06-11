@@ -22,10 +22,10 @@ class Navbar extends Component {
     render() {
 
         return (
-            <nav className = "navbar is-transparent">
+            <nav className = "navbar is-primary text-is-white">
                 <div className = "navbar-brand">
                     <div className = "navbar-item">
-                        <p>Opinionated Waters</p>
+                        <p>OpinWater</p>
                     </div>
                     <div id = "navbar-navbar" className = {this.state.navbarState} onClick = {this.activeBurger}>
                         <span></span>

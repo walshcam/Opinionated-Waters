@@ -17,6 +17,8 @@ import Button from "../UI/Button/Button";
 //Comment Components
 import CommentForm from "../UI/CommentSection/CommentForm/CommentForm";
 import CommentComponent from "../UI/CommentSection/CommentComponent/CommentComponent";
+//CSS Files
+import "./feature.css";
 
 //Information needed for leaflet
 const attribution = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
@@ -45,6 +47,7 @@ class Feature extends Component {
         displayName: "",
         featureType: "",
         featureID: "",
+        buttonLoadingClass: "button is-large content is-primary",
         //Bounding Box and its corrections
         geoJsonKey: 0,
         geoJsonData: {
@@ -108,6 +111,10 @@ class Feature extends Component {
 
     //This changes the map based on the search query
     mapSearchHandler = () => {
+        //Loading Button
+        this.setState({
+            buttonLoadingClass: "button is-large content is-primary is-loading"
+        })
         //Format Input For API call
         let correctedLocation = [...this.state.rawLocation].concat([" "],[...this.state.rawLocation2],[" "],[...this.state.rawLocation3]);
         console.log(correctedLocation);
@@ -133,6 +140,10 @@ class Feature extends Component {
                 const viewbox2 = [boundingBox[1], boundingBox[3]];
 
                 this.setState({
+                    rawLocation: "",
+                    rawLocation2: "",
+                    rawLocation3: "",
+                    buttonLoadingClass: "button is-large content is-primary",
                     bounds: latLngBounds(viewbox1,viewbox2),
                     displayName: data.display_name,
                     featureType: data.type,
@@ -217,7 +228,13 @@ class Feature extends Component {
         })
         .then(response => {
             console.log(response);
-            // this.commentsGetHandler();
+            //Clear out input fields
+            this.setState({
+                heading: "",
+                paragraph: ""
+            });
+            //Reload comments to include the one just included
+            this.commentsGetHandler();
         })
         .catch(error => {
             console.log(error);
@@ -248,66 +265,72 @@ class Feature extends Component {
             <Fragment>
                 <Navbar />
                 <div className = "container">
-                    <Section>
-                        <MapComponent>
-                            <LeafletMap 
-                                bounds = {this.state.bounds}
-                                useFlyTo = {true}
-                            > 
-                                <TileLayer
-                                    attribution= {attribution}
-                                    url= {url}
-                                    id = {id}
-                                />
-                                {this.geoJSONData(this.state.geoJsonKey, this.state.geoJsonData, waterFeatureStyle)}
-                            </LeafletMap>
-                        </MapComponent>
-                    </Section>
-                    <Section>
-                        <Input
-                            input = {this.state.rawLocation} 
-                            updateInput = {this.inputHandler}
-                            type = {"text"}
-                            placeholder = {"Lake Michigan"}
-                        />
-                        <div className = "columns">
-                            <div className = "column is-half">
-                                <Input
-                                    input = {this.state.rawLocation2} 
-                                    updateInput = {this.inputHandler2}
-                                    type = {"text"}
-                                    placeholder = {"State or City (Optional)"}
-                                />
+                    <div id = "mapMediaQuery">
+                        <Section>       
+                            <MapComponent>
+                                <LeafletMap 
+                                    bounds = {this.state.bounds}
+                                    useFlyTo = {true}
+                                > 
+                                    <TileLayer
+                                        attribution= {attribution}
+                                        url= {url}
+                                        id = {id}
+                                    />
+                                    {this.geoJSONData(this.state.geoJsonKey, this.state.geoJsonData, waterFeatureStyle)}
+                                </LeafletMap>
+                            </MapComponent>
+                        </Section>
+                    </div>
+                    <div id = "contentMediaQuery">
+                        <Section>
+                            <Input
+                                input = {this.state.rawLocation} 
+                                updateInput = {this.inputHandler}
+                                type = {"text"}
+                                placeholder = {"Lake Michigan"}
+                            />
+                            <div className = "columns">
+                                <div className = "column is-half">
+                                    <Input
+                                        id = {"rawLocation2"}
+                                        input = {this.state.rawLocation2} 
+                                        updateInput = {this.inputHandler2}
+                                        type = {"text"}
+                                        placeholder = {"State or City (Optional)"}
+                                    />
+                                </div>
+                                <div className = "column is-half">
+                                    <Input
+                                        id = {"rawLocation3"}
+                                        input = {this.state.rawLocation3} 
+                                        updateInput = {this.inputHandler3}
+                                        type = {"text"}
+                                        placeholder = {"Country (Optional)"}
+                                    />
+                                </div>
                             </div>
-                            <div className = "column is-half">
-                                <Input
-                                    input = {this.state.rawLocation3} 
-                                    updateInput = {this.inputHandler3}
-                                    type = {"text"}
-                                    placeholder = {"Country (Optional)"}
-                                />
-                            </div>
-                        </div>
-                        <Button 
-                            onClick = {this.mapSearchHandler} 
-                            text = {"Search"}
-                        />
-                    </Section>
-                    <Section>
-                        <CommentForm 
-                            headingText = {this.state.heading}
-                            headingOnChange = {this.headingChange}
-                            commentOnChange = {this.commentChange}
-                            buttonText = {"Submit"}
-                            onClick = {this.newCommentsPostHandler}
-                        />
-                    </Section>
-                    <Section>
-                        <CommentComponent
-                            getComments = {this.state.comments} 
-                            deleteComments = {() => this.CommentsDeleteHandler()}
-                        />
-                    </Section>
+                            <Button
+                                onClick = {this.mapSearchHandler}
+                                text = {"Search"}
+                            />
+                        </Section>
+                        <Section>
+                            <CommentForm 
+                                headingText = {this.state.heading}
+                                headingOnChange = {this.headingChange}
+                                commentOnChange = {this.commentChange}
+                                buttonText = {"Submit"}
+                                onClick = {this.newCommentsPostHandler}
+                            />
+                        </Section>
+                        <Section>
+                            <CommentComponent
+                                getComments = {this.state.comments} 
+                                deleteComments = {() => this.CommentsDeleteHandler()}
+                            />
+                        </Section>
+                    </div>
                 </div>
             </Fragment>
         )

@@ -2,11 +2,13 @@ import React from "react";
 import "./MapComponent.css";
 
 const mapStyle = {
-    height: '90hv'
-}
+    height: '90vh'
+};
+
+const mapClass = "box";
 
 const MapComponent = ({ children }) => (
-    <div id="mapid" style = {mapStyle}>
+    <div id="mapid" className = {mapClass} style = {mapStyle}>
         {children}
     </div>
 );

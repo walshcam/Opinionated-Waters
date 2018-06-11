@@ -1,0 +1,22 @@
+/* Fix Map To Right On Large Screens */
+@media only screen and (min-width : 768px) {
+    .leaflet-container {
+        height: 100%
+    }
+    
+    #mapMediaQuery {
+        height: 99%;
+        width: 40%;
+        position: fixed;
+        z-index: 1;
+        padding-top: 1%;
+        top:0;
+        right: 0;
+        overflow: hidden;
+    }
+
+    #contentMediaQuery {
+        width: 60%;
+        left: 0;
+    }
+}
