@@ -27,8 +27,8 @@ const CommentForm = (props) => (
                     className="textarea" 
                     placeholder="New Comment"
                     onChange = {props.commentOnChange}
+                    value = {props.commentText}
                 >
-                    {props.value}
                 </textarea>
             </div>
         </div>
