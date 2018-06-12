@@ -20,13 +20,13 @@ The map is made using leaflet's react package. Mapbox's satellite overlay is uti
 
 GeoJSON data is found using the nominatim API to create a polygon over any body of water.
 
-![Map Functionality](./readmeImages/MapFunction.gif)
+![Map Functionality](./../readmeImages/MapFunction.gif)
 
 ### COMMENTS
 
 Comments are passed to the mongo database and retrieved based on what body of water the user has searched for.
 
-![Comment Functionality](./readmeImages/CommentFunction.gif)
+![Comment Functionality](./../readmeImages/CommentFunction.gif)
 
 ## TECHNOLOGIES APPLIED
 

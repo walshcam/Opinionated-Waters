@@ -1,29 +1,55 @@
-# Create React Express App
+# OpinWater
 
-## About This Boilerplate
+## WHAT IS IT?
 
-This setup allows for a Node/Express/React app which can be easily deployed to Heroku.
+This is a web app that utilizes the MERN stack to allow users to input comments about any body of water on the globe. Other users can then log in, read existing comments, and input their own.
 
-The front-end React app will auto-reload as it's updated via webpack dev server, and the backend Express app will auto-reload independently with nodemon.
+### AUTHORIZATION
 
-## Starting the app locally
+Secure authorization is implimented using passport and bcrypt. At this time, sign in is only available using the local method. 
 
-Start by installing front and backend dependencies. While in this directory, run the following command:
+Passwords are salted and hashed with bcrypt before being stored in the Mongo database. 
 
-```
-yarn install
-``
+Passport is used to create and verify the JWT (JSON Web Token). The JWT is used to verify the identity of the user during every API call to the backend of the application.
 
-This should install node modules within the server and the client folder.
+Redux is used to store the user's login information. This allows the webpage to be refreshed without the user needing to sign on again.
 
-After both installations complete, run the following command in your terminal:
+### MAP
 
-```
-yarn start
-```
+The map is made using leaflet's react package. Mapbox's satellite overlay is utilized over OpenStreetMap data to create the base layer of the map.
 
-Your app should now be running on <http://localhost:3000>. The Express server should intercept any AJAX requests from the client.
+GeoJSON data is found using the nominatim API to create a polygon over any body of water.
 
-## Deployment (Heroku)
+![Map Functionality](./readmeImages/MapFunction.gif)
 
-To deploy, simply add and commit your changes, and push to Heroku. As is, the NPM scripts should take care of the rest.
+### COMMENTS
+
+Comments are passed to the mongo database and retrieved based on what body of water the user has searched for.
+
+![Comment Functionality](./readmeImages/CommentFunction.gif)
+
+## TECHNOLOGIES APPLIED
+
+- MongoDB
+    - mongoose
+    - morgan
+- node.js
+    - Express
+        - bcrypt-nodejs
+        - body-parser
+        - cors
+        - jwt-simple
+        - passport
+        - passport-jwt
+        - passport-local
+- React
+    - axios
+    - react-leaflet
+    - react-router-dom
+    - Redux
+        - redux
+        - react-redux
+        - redux-form
+        - redux-thunk
+- CSS
+    - Bulma
