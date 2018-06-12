@@ -148,7 +148,7 @@ class Feature extends Component {
                 let displayNameFormatting = data.display_name;
                 displayNameFormatting = displayNameFormatting.split(",");
                 displayNameFormatting = displayNameFormatting[0];
-                displayNameFormatting = displayNameFormatting.join("");
+                displayNameFormatting = displayNameFormatting.toString();
 
 
                 this.setState({
