@@ -74,6 +74,11 @@ class Feature extends Component {
 //Map Functions
 //==============================================================================
 
+    //This manipulates the display_name state for the title display
+    displayTitle = () => {
+
+    }
+
     //This handles the input field for the map search.
     inputHandler = (event) => {
         const inputValue = event.target.value;
@@ -139,13 +144,20 @@ class Feature extends Component {
                 const viewbox1 = [boundingBox[0], boundingBox[2]];
                 const viewbox2 = [boundingBox[1], boundingBox[3]];
 
+                //Change display_name for title
+                const displayNameFormatting = data.display_name;
+                displayNameFormatting = displayNameFormatting.split(",");
+                displayNameFormatting = displayNameFormatting[0];
+                displayNameFormatting = displayNameFormatting.join();
+
+
                 this.setState({
                     rawLocation: "",
                     rawLocation2: "",
                     rawLocation3: "",
                     buttonLoadingClass: "button is-large content is-primary",
                     bounds: latLngBounds(viewbox1,viewbox2),
-                    displayName: data.display_name,
+                    displayName: displayNameFormatting,
                     featureType: data.type,
                     featureID: data.place_id,
                     geoJsonData: {
@@ -266,6 +278,9 @@ class Feature extends Component {
                 <Navbar />
                 <div className = "container">
                     <div id = "mapMediaQuery">
+                        <div id = "header" className = "subtitle has-text-primary">
+                            {this.state.displayName}
+                        </div>
                         <Section>       
                             <MapComponent>
                                 <LeafletMap 
@@ -319,6 +334,7 @@ class Feature extends Component {
                             <CommentForm 
                                 headingText = {this.state.heading}
                                 headingOnChange = {this.headingChange}
+                                commentText = {this.state.paragraph}
                                 commentOnChange = {this.commentChange}
                                 buttonText = {"Submit"}
                                 onClick = {this.newCommentsPostHandler}
