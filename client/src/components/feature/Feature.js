@@ -278,10 +278,10 @@ class Feature extends Component {
                 <Navbar />
                 <div className = "container">
                     <div id = "mapMediaQuery">
-                        <div id = "header" className = "subtitle has-text-primary">
-                            {this.state.displayName}
-                        </div>
-                        <Section>       
+                        <Section>
+                            <div id = "featureHeader" className = "subtitle has-text-primary">
+                                {this.state.displayName}
+                            </div>       
                             <MapComponent>
                                 <LeafletMap 
                                     bounds = {this.state.bounds}

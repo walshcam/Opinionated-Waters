@@ -2,7 +2,7 @@ import React from "react";
 import "./MapComponent.css";
 
 const mapStyle = {
-    height: '90vh'
+    height: '80vh'
 };
 
 const mapClass = "box";

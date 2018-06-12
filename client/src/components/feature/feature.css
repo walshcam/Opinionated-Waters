@@ -1,3 +1,9 @@
+/* Water Feature Title */
+#featureHeader {
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
 /* Fix Map To Right On Large Screens */
 @media only screen and (min-width : 768px) {
     .leaflet-container {
