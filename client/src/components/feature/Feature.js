@@ -145,7 +145,7 @@ class Feature extends Component {
                 const viewbox2 = [boundingBox[1], boundingBox[3]];
 
                 //Change display_name for title
-                const displayNameFormatting = data.display_name;
+                let displayNameFormatting = data.display_name;
                 displayNameFormatting = displayNameFormatting.split(",");
                 displayNameFormatting = displayNameFormatting[0];
                 displayNameFormatting = displayNameFormatting.join();
