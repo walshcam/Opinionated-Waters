@@ -305,26 +305,20 @@ class Feature extends Component {
                                 type = {"text"}
                                 placeholder = {"Lake Michigan"}
                             />
-                            <div className = "columns">
-                                <div className = "column is-half">
-                                    <Input
-                                        id = {"rawLocation2"}
-                                        input = {this.state.rawLocation2} 
-                                        updateInput = {this.inputHandler2}
-                                        type = {"text"}
-                                        placeholder = {"State or City (Optional)"}
-                                    />
-                                </div>
-                                <div className = "column is-half">
-                                    <Input
-                                        id = {"rawLocation3"}
-                                        input = {this.state.rawLocation3} 
-                                        updateInput = {this.inputHandler3}
-                                        type = {"text"}
-                                        placeholder = {"Country (Optional)"}
-                                    />
-                                </div>
-                            </div>
+                            <Input
+                                id = {"rawLocation2"}
+                                input = {this.state.rawLocation2} 
+                                updateInput = {this.inputHandler2}
+                                type = {"text"}
+                                placeholder = {"State or City (Optional)"}
+                            />
+                            <Input
+                                id = {"rawLocation3"}
+                                input = {this.state.rawLocation3} 
+                                updateInput = {this.inputHandler3}
+                                type = {"text"}
+                                placeholder = {"Country (Optional)"}
+                            />
                             <Button
                                 onClick = {this.mapSearchHandler}
                                 text = {"Search"}

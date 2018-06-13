@@ -9,7 +9,7 @@
     
     #mapMediaQuery {
         height: 99%;
-        width: 40%;
+        width: 300px;
         position: fixed;
         z-index: 1;
         padding-top: 1%;
@@ -19,7 +19,7 @@
     }
 
     #contentMediaQuery {
-        width: 60%;
+        width: calc(100% - 300px);
         left: 0;
     }
 }
