@@ -9,17 +9,16 @@
     
     #mapMediaQuery {
         height: 99%;
-        width: calc(100% - 450px);
+        width: calc(100% - 350px);
         position: fixed;
         z-index: 1;
         padding-top: 1%;
         top:0;
-        right: 50px;
+        right: 0;
         overflow: hidden;
     }
 
     #contentMediaQuery {
-        width: 30%;
-        left: 50px;
+        width: 350px;
     }
 }
