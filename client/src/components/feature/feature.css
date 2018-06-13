@@ -9,7 +9,7 @@
     
     #mapMediaQuery {
         height: 99%;
-        width: (100% - 400px);
+        width: calc(100% - 400px);
         position: fixed;
         z-index: 1;
         padding-top: 1%;
