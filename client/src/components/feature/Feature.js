@@ -276,7 +276,6 @@ class Feature extends Component {
         return (
             <Fragment>
                 <Navbar />
-                <div className = "container">
                     <div id = "mapMediaQuery">
                         <Section>
                             <div id = "featureHeader" className = "subtitle has-text-primary">
@@ -341,7 +340,6 @@ class Feature extends Component {
                             />
                         </Section>
                     </div>
-                </div>
             </Fragment>
         )
     }
