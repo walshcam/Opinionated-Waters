@@ -23,7 +23,7 @@ import "./feature.css";
 
 //Information needed for leaflet
 const attribution = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
-const accessToken = process.env.MAPBOX_ACCESSTOKEN;
+const accessToken = 'pk.eyJ1Ijoid2Fsc2hjYW0iLCJhIjoiY2pod2s1Y3lkMDF2ZjNwcDhwcHZqa242ciJ9.O62o_MIG55mOB3UsvEuBNg';
 const url = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + accessToken;
 const id = 'mapbox.satellite';
 
