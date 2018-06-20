@@ -210,9 +210,9 @@ class Feature extends Component {
         axios({
             method: 'get',
             //LocalHost
-            url: `http://localhost:3001/feature/${this.state.featureID}`,
+            // url: `http://localhost:3001/feature/${this.state.featureID}`,
             // //Heroku
-            // url: `https://opinwater.herokuapp.com/feature/${this.state.featureID}`,
+            url: `https://opinwater.herokuapp.com/feature/${this.state.featureID}`,
             headers: {
                 authorization: localStorage.getItem('token')
             }
@@ -233,9 +233,9 @@ class Feature extends Component {
         axios({
             method: 'post',
             //LocalHost
-            url: `http://localhost:3001/feature/${this.state.featureID}`,
+            // url: `http://localhost:3001/feature/${this.state.featureID}`,
             // //Heroku
-            // url: `https://opinwater.herokuapp.com/feature/${this.state.featureID}`,
+            url: `https://opinwater.herokuapp.com/feature/${this.state.featureID}`,
             headers: {
                 authorization: localStorage.getItem('token')
             },

@@ -10,9 +10,9 @@ export const signin = (formProps, callback) => async dispatch => {
     try{
         //Await is used to ensure this action is taken before moving forward
             //HEROKU DEPLOYMENT
-        // const response = await axios.post('https://opinwater.herokuapp.com/signin', formProps);
+        const response = await axios.post('https://opinwater.herokuapp.com/signin', formProps);
             //LOCAL DEPLOYMENT
-        const response = await axios.post('http://localhost:3001/signin', formProps);
+        // const response = await axios.post('http://localhost:3001/signin', formProps);
 
         dispatch({ type: AUTH_USER, payload: response.data.token });
         //This saves the token to local storage
@@ -33,9 +33,9 @@ export const signup = (formProps, callback) => async dispatch => {
     try{
         //Await is used to ensure this action is taken before moving forward
             //HEROKU DEPLOYMENT
-        // const response = await axios.post('https://opinwater.herokuapp.com/signup', formProps);
+        const response = await axios.post('https://opinwater.herokuapp.com/signup', formProps);
             //LOCAL DEPLOYMENT
-        const response = await axios.post('http://localhost:3001/signup', formProps);
+        // const response = await axios.post('http://localhost:3001/signup', formProps);
 
         dispatch({ type: AUTH_USER, payload: response.data.token });
         //This saves the token to local storage
