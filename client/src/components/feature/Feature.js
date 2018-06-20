@@ -8,6 +8,7 @@ import axios from 'axios';
 //Leaflet Context API
 import { Map as LeafletMap, TileLayer, GeoJSON } from 'react-leaflet';
 import { latLngBounds } from 'leaflet';
+import config from './../../../config/config';
 //Components Required
 import Section from "../UI/Section/Section";
 import Navbar from "../UI/Navbar/Navbar";
@@ -22,7 +23,7 @@ import "./feature.css";
 
 //Information needed for leaflet
 const attribution = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
-const accessToken = 'pk.eyJ1Ijoid2Fsc2hjYW0iLCJhIjoiY2pod2s1Y3lkMDF2ZjNwcDhwcHZqa242ciJ9.O62o_MIG55mOB3UsvEuBNg';
+const accessToken = process.env.MAPBOX_ACCESSTOKEN || config.MAPBOX_ACCESSTOKEN;
 const url = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + accessToken;
 const id = 'mapbox.satellite';
 
@@ -208,7 +209,10 @@ class Feature extends Component {
     commentsGetHandler = () => {
         axios({
             method: 'get',
-            url: `https://opinwater.herokuapp.com/feature/${this.state.featureID}`,
+            //LocalHost
+            url: `http://localhost:3001/feature/${this.state.featureID}`,
+            // //Heroku
+            // url: `https://opinwater.herokuapp.com/feature/${this.state.featureID}`,
             headers: {
                 authorization: localStorage.getItem('token')
             }
@@ -228,7 +232,10 @@ class Feature extends Component {
     newCommentsPostHandler = () => {
         axios({
             method: 'post',
-            url: `https://opinwater.herokuapp.com/feature/${this.state.featureID}`,
+            //LocalHost
+            url: `http://localhost:3001/feature/${this.state.featureID}`,
+            // //Heroku
+            // url: `https://opinwater.herokuapp.com/feature/${this.state.featureID}`,
             headers: {
                 authorization: localStorage.getItem('token')
             },
