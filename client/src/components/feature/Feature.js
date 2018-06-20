@@ -8,7 +8,11 @@ import axios from 'axios';
 //Leaflet Context API
 import { Map as LeafletMap, TileLayer, GeoJSON } from 'react-leaflet';
 import { latLngBounds } from 'leaflet';
-const accessToken = process.env.MAPBOX_ACCESSTOKEN || import('./../../../config/config').MAPBOX_ACCESSTOKEN;
+// HEROKU ONLY
+const accessToken = process.env.MAPBOX_ACCESSTOKEN;
+// LOCAL ONLY
+// import config from "./../../../config/config"
+// const accessToken = config.MAPBOX_ACCESSTOKEN;
 //Components Required
 import Section from "../UI/Section/Section";
 import Navbar from "../UI/Navbar/Navbar";
