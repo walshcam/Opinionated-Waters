@@ -8,7 +8,7 @@ import axios from 'axios';
 //Leaflet Context API
 import { Map as LeafletMap, TileLayer, GeoJSON } from 'react-leaflet';
 import { latLngBounds } from 'leaflet';
-import config from './../../../config/config';
+const accessToken = process.env.MAPBOX_ACCESSTOKEN || import('./../../../config/config').MAPBOX_ACCESSTOKEN;
 //Components Required
 import Section from "../UI/Section/Section";
 import Navbar from "../UI/Navbar/Navbar";
@@ -23,7 +23,6 @@ import "./feature.css";
 
 //Information needed for leaflet
 const attribution = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
-const accessToken = process.env.MAPBOX_ACCESSTOKEN || config.MAPBOX_ACCESSTOKEN;
 const url = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + accessToken;
 const id = 'mapbox.satellite';
 
